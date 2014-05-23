@@ -6,57 +6,57 @@ html(ng-app='Match')
     link(rel='stylesheet', href='/css/bootstrap-theme.css')
   body(ng-controller='GameController')
     Header 
-  .container
-    div
+    .well
+      div
+        .row
+          .col-md-4
+            .navbar-header
+               button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+               span.icon-toggle
+               a.navbar-brand(href='/') 
+               label( style='font-size: 30px;') Other use
+          .col-md-6
+            .btn-group.btn-group-justified
+              a.btn.btn-success.col-sm-3(href='/')
+                i.glyphicon.glyphicon-time
+                br
+                span.badge
+                  span(ng-bind='time || 0')
+              a.btn.btn-success.col-sm-3(href='/')
+                i.glyphicon.glyphicon-screenshot
+                br
+                span.badge
+                  span(ng-bind='tries || 0')     
+              a.btn.btn-primary.col-sm-3(href='#')
+                i.glyphicon.glyphicon-pause
+                br
+              a.btn.btn-primary.col-sm-3(ng-click='start()')
+                i.glyphicon.glyphicon-play
+                br
+              span.btn.btn-primary.col-sm-3(href='#')
+                i.glyphicon.glyphicon-comment
+                br
+                span.badge
+                  span(ng-bind='messages.length || 0')
+              a.btn.btn-primary.col-sm-3
+                i.glyphicon.glyphicon-cog
+                br
+              a.btn.btn-primary.col-sm-3
+                i.glyphicon.glyphicon-question-sign
+                br
+          .col-md-2
+            span.btn.btn-primary.col-sm-12(href='#')
+              span(ng-bind='user.name || "User"')
+      br
+    .container 
       .row
-        .col-md-4
-          .navbar-header
-             button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
-             span.icon-toggle
-             a.navbar-brand(href='/') 
-             label( style='font-size: 30px;') Time: {{time}}
-        .col-md-6
-          .btn-group.btn-group-justified
-            a.btn.btn-success.col-sm-3(href='/')
-              i.glyphicon.glyphicon-print
-              br
-              span.badge
-                span(ng-bind='files.printed || 0')
-            a.btn.btn-warning.col-sm-3(href='/')
-              i.glyphicon.glyphicon-folder-open
-              br
-              span.badge
-                span(ng-bind='files.length')
-            a.btn.btn-primary.col-sm-3(href='#')
-              i.glyphicon.glyphicon-pause
-              br
-            a.btn.btn-primary.col-sm-3(href='/')
-              i.glyphicon.glyphicon-play
-              br
-            a.btn.btn-primary.col-sm-3
-              i.glyphicon.glyphicon-question-sign
-              br
-            span.btn.btn-primary.col-sm-3(href='#')
-              i.glyphicon.glyphicon-comment
-              br
-              span.badge 4
-            a.btn.btn-primary.col-sm-3
-              i.glyphicon.glyphicon-cog
-              br
-              span.badge 3
-        .col-md-2 
-          span.btn.btn-primary(href='#')
-            | daniel@monoapps.tk
-        
-      br 
-      div.row
         form(role='form')
           .col-lg-1.form-group(ng-repeat='c in chs')
-            button.btn.btn-danger.form-control(ng-bind='c.value', ng-click='try($index)', style='font-size: 90px; height: 190px; width: 95px;')
+            button.btn.btn-game.form-control(ng-class="{'btn-warning': c.status == 'selected', 'btn-success': c.status == 'done', '': c.status == ''}", ng-bind='c.value', ng-click='try($index)')
 
-          script(type='text/javascript', src='/js/libs/jquery.js')
-          script(type='text/javascript', src='/js/libs/angular.js')
-          script(type='text/javascript', src='/js/libs/bootstrap.js')
-          script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js')
-          script(type='text/javascript', src='/js/ng/app.js')
-          script(type='text/javascript', src='/js/ng/match.js')
+    script(type='text/javascript', src='/js/libs/jquery.js')
+    script(type='text/javascript', src='/js/libs/angular.js')
+    script(type='text/javascript', src='/js/libs/bootstrap.js')
+    script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js')
+    script(type='text/javascript', src='/js/ng/app.js')
+    script(type='text/javascript', src='/js/ng/match.js')
