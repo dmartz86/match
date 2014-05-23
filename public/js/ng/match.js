@@ -10,6 +10,9 @@ app.controller('GameController', function GameController($scope, $http) {
 	$scope.chs = [];
 	$scope.time = 120;
 	$scope.tries = 0;
+	$scope.wins = 0;
+	$scope.loss = 0;
+        $scope.playerWin = false;
 	var interval = false;
 	var tape = 9641;
 	
@@ -33,10 +36,31 @@ app.controller('GameController', function GameController($scope, $http) {
 	};
 
 	$scope.clock = function() {
+	  $scope.time = 120;
 		interval = setInterval(function() {
 			$scope.time--;
+			if($scope.time == 0){
+			  $scope.gameover = true;
+			  $scope.loss++;
+			  $scope.clearClock();	
+			}
 			$scope.$apply();
 		}, 1000);
+	};
+	
+	$scope.checkIsDone = function (){
+          var done = false;
+	  for(var idx in $scope.chs){
+	    if($scope.chs[idx].status != 'done'){
+	      done = false;
+	      continue;  
+	    };
+	  };
+	  
+	  if (done){
+	    $scope.wins++;
+	    $scope.playerWin;
+	  }
 	};
 
 	$scope.clearClock = function() {
@@ -44,35 +68,40 @@ app.controller('GameController', function GameController($scope, $http) {
 	};
 
 	$scope.try = function(idx) {
-		if ($scope.chs[idx].status == 'done'){
-			return;
-		}
-		
-		$scope.chs[idx].status = 'selected';
-		$scope.peer.push($scope.chs[idx]);
-		$scope.peerIdx.push(idx);
-		
-		//Prevent double click?
-		console.log($scope.peer.length);
+		$scope.addOne(idx);
+	
 		if($scope.peer.length == 2 ){
 			$scope.tries++;
 			
-			console.log($scope.peer[0].code == $scope.peer[1].code)
 			if ($scope.peer[0].code == $scope.peer[1].code){
-				$scope.chs[$scope.peerIdx[0]].status == 'done';
-				$scope.chs[$scope.peerIdx[1]].status == 'done';
+				$scope.chs[$scope.peerIdx[0]].status = 'done';
+				$scope.chs[$scope.peerIdx[1]].status = 'done';
+				$scope.checkIsDone();
 			}else{
-				$scope.chs[$scope.peerIdx[0]].status == '';
-				$scope.chs[$scope.peerIdx[1]].status == '';
+				$scope.chs[$scope.peerIdx[0]].status = '';
+				$scope.chs[$scope.peerIdx[1]].status = '';
 				$scope.peer = [];
 				$scope.peerIdx = [];
 			}
+			
+			$scope.reset();
 		}
-		
-		if($scope.peer.length > 2 ){
-			$scope.peer = [];
-			$scope.peerIdx = [];
-		}
+	};
+	
+	$scope.reset = function(){
+  	  $scope.peer = [];
+	  $scope.peerIdx = [];
+	};
+	
+	$scope.addOne = function (idx){
+	  //Do not add twice and exclude done
+	  if($scope.chs[idx].status == 'selected' || $scope.chs[idx].status == 'done'){
+            $scope.chs[$scope.peerIdx[0]].status == '';
+	    return;
+	  }
+	  $scope.chs[idx].status = 'selected';
+	  $scope.peer.push($scope.chs[idx]);
+	  $scope.peerIdx.push(idx);	  
 	};
 	
 	//Thanks to edymerchk
@@ -82,10 +111,11 @@ app.controller('GameController', function GameController($scope, $http) {
 	};
 	
 	$scope.start = function(){
+		$scope.showMessage = false;
 		var sa = _.range(10033, 10057);
 		var sb = _.range(10033, 10057);
 		var sc = [];
-	  var idx = 0;
+		var idx = 0;
 		for (var c in sa) {
 			sc[idx] = {idx: c, value: pSc(sa[c]), done: false, status: '',code: sa[c]};
 			idx++;
@@ -101,6 +131,11 @@ app.controller('GameController', function GameController($scope, $http) {
 		//$scope.chs = $scope.shuffle(sm);
 	
 		$scope.clock();
+	};
+	
+	$scope.stop = function(){
+	  $scope.chs = [];
+	  $scope.showMessage = true;
 	};
   
 

@@ -28,11 +28,18 @@ html(ng-app='Match')
                 span.badge
                   span(ng-bind='tries || 0')     
               a.btn.btn-primary.col-sm-3(href='#')
-                i.glyphicon.glyphicon-pause
+                i.glyphicon.glyphicon-pause(ng-click='stop()')
                 br
               a.btn.btn-primary.col-sm-3(ng-click='start()')
                 i.glyphicon.glyphicon-play
                 br
+                span.badge
+                  span(ng-bind='wins || 0')
+              a.btn.btn-danger.col-sm-3
+                i.glyphicon.glyphicon-remove
+                br
+                span.badge
+                  span(ng-bind='loss || 0')
               span.btn.btn-primary.col-sm-3(href='#')
                 i.glyphicon.glyphicon-comment
                 br
@@ -48,11 +55,18 @@ html(ng-app='Match')
             span.btn.btn-primary.col-sm-12(href='#')
               span(ng-bind='user.name || "User"')
       br
-    .container 
+    div.container(ng-show='!showMessage') 
       .row
         form(role='form')
           .col-lg-1.form-group(ng-repeat='c in chs')
             button.btn.btn-game.form-control(ng-class="{'btn-warning': c.status == 'selected', 'btn-success': c.status == 'done', '': c.status == ''}", ng-bind='c.value', ng-click='try($index)')
+
+    
+    div(ng-show='showMessage')
+      .cointainer
+         .form(role='form')
+           .form-group
+             label.form-control  Mensaje para mostrar
 
     script(type='text/javascript', src='/js/libs/jquery.js')
     script(type='text/javascript', src='/js/libs/angular.js')
