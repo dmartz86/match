@@ -8,17 +8,20 @@ app.controller('GameController', function GameController($scope, $http) {
 	$scope.title = "The match game";
 	//Single match and characters array
 	$scope.chs = [];
-	$scope.time = 120;
+	$scope.level = 1;
+	$scope.MAX_LEVEL = 24;
+	$scope.START_RANGE = 10033;
+	$scope.END_RANGE= 10057;
+	$scope.time = 0;
 	$scope.tries = 0;
 	$scope.wins = 0;
 	$scope.loss = 0;
-        $scope.playerWin = false;
+  $scope.done = false;
 	var interval = false;
 	var tape = 9641;
 	
 	$scope.user = {
-		name: 'Daniel',
-		email: 'daniel.martinez@yuxipacific.com'
+		name: 'User'
 	};
 	
 	//The selected peer
@@ -36,35 +39,40 @@ app.controller('GameController', function GameController($scope, $http) {
 	};
 
 	$scope.clock = function() {
-	  $scope.time = 120;
+	  $scope.time = 0;
 		interval = setInterval(function() {
-			$scope.time--;
-			if($scope.time == 0){
-			  $scope.gameover = true;
-			  $scope.loss++;
-			  $scope.clearClock();	
-			}
+			$scope.time++;
 			$scope.$apply();
-		}, 1000);
+		}, 1);
 	};
 	
 	$scope.checkIsDone = function (){
-          var done = false;
+    var done = true;
 	  for(var idx in $scope.chs){
 	    if($scope.chs[idx].status != 'done'){
 	      done = false;
-	      continue;  
+	      break;  
 	    };
 	  };
 	  
 	  if (done){
+	  	console.log('Win level ' + $scope.level + ' with time: ' + $scope.time +' ms');
 	    $scope.wins++;
-	    $scope.playerWin;
+	    $scope.done = true;
+	    $scope.clearClock();
+	    if($scope.level != $scope.MAX_LEVEL){
+	    	$scope.level++;
+	    }
+	    $scope.messages.push({value:'Win level ' + $scope.level + 'with time: ' + $scope.time +' ms', time:$scope.time});
+	    $scope.time = 0;
+	    $scope.reset();
 	  }
 	};
 
 	$scope.clearClock = function() {
-		clearInterval(interval);
+		if(interval){
+			clearInterval(interval);
+		}
 	};
 
 	$scope.try = function(idx) {
@@ -89,8 +97,9 @@ app.controller('GameController', function GameController($scope, $http) {
 	};
 	
 	$scope.reset = function(){
-  	  $scope.peer = [];
+  	$scope.peer = [];
 	  $scope.peerIdx = [];
+	  $scope.time = 0;
 	};
 	
 	$scope.addOne = function (idx){
@@ -111,9 +120,11 @@ app.controller('GameController', function GameController($scope, $http) {
 	};
 	
 	$scope.start = function(){
-		$scope.showMessage = false;
-		var sa = _.range(10033, 10057);
-		var sb = _.range(10033, 10057);
+		$scope.done = false;
+		$scope.chs = [];
+		$scope.reset();
+		var sa = _.range($scope.START_RANGE, $scope.START_RANGE + $scope.level);
+		var sb = _.range($scope.START_RANGE, $scope.START_RANGE + $scope.level);
 		var sc = [];
 		var idx = 0;
 		for (var c in sa) {
@@ -134,9 +145,9 @@ app.controller('GameController', function GameController($scope, $http) {
 	};
 	
 	$scope.stop = function(){
+	  $scope.reset();
+	  $scope.clearClock();
 	  $scope.chs = [];
-	  $scope.showMessage = true;
 	};
-  
 
 });

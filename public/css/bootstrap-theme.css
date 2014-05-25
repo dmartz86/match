@@ -350,7 +350,10 @@
  */
 .btn-game {
 	font-size: 90px; 
-	height: 190px; 
+	height: 90px; 
 	width: 95px;
+}
+.item-game {
+	margin-top: -25px;
 }
 /*# sourceMappingURL=bootstrap-theme.css.map */
