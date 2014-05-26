@@ -60,10 +60,18 @@ app.controller('GameController', function GameController($scope, $http) {
 	    $scope.wins++;
 	    $scope.done = true;
 	    $scope.clearClock();
-	    if($scope.level != $scope.MAX_LEVEL){
+	    
+			$scope.messages.push({
+				value : 'Win level ' + $scope.level + 'with time: ' + $scope.time + ' ms',
+				time : $scope.time,
+				level: $scope.level,
+				tries: $scope.tries
+			});
+			
+			if($scope.level != $scope.MAX_LEVEL){
 	    	$scope.level++;
 	    }
-	    $scope.messages.push({value:'Win level ' + $scope.level + 'with time: ' + $scope.time +' ms', time:$scope.time});
+
 	    $scope.time = 0;
 	    $scope.reset();
 	  }

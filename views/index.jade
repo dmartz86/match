@@ -38,13 +38,20 @@ html(ng-app='Match')
                     .col-xs-12.text-right
                       p.announcement-heading {{tries || 0 }}
             .col-lg-12
-              .panel.panel-danger
-                .panel-heading
-                  .row
-                    .col-xs-12
-                      i.glyphicon.glyphicon-time.fa-5x
-                    .col-xs-12.text-right
-                      p.announcement-heading {{loss || 0 }}
+              div.level-results
+                .row
+                  .col-xs-12
+                    table.table.table-condensed
+                      tr
+                        td Level
+                        td Time
+                        td Attempt
+                      tr(ng-repeat='m in messages')
+                        td {{m.level}}
+                        td {{m.time}}
+                        td {{m.tries}}
+                      
+                    
 
       .col-md-10
         div
@@ -81,7 +88,7 @@ html(ng-app='Match')
         .row
           .col-md-12(ng-show='done')
             .well
-              p.announcement-heading(style='font-size: 20px;') Well done {{user.name || 'user' }}!. Your next level is {{level}}.
+              p.announcement-heading(style='font-size: 20px;') Well done {{user.name || 'user' }}! Your next level is {{level}}. The highest level is {{MAX_LEVEL}}.
               
     #userNameModal.modal.fade(tabindex="-1", role="dialog", aria-labelledby="userNameModalLabel", aria-hidden="true")
       .modal-dialog

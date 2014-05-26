@@ -356,4 +356,8 @@
 .item-game {
 	margin-top: -25px;
 }
-/*# sourceMappingURL=bootstrap-theme.css.map */
+.level-results {
+	max-height: 140px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
