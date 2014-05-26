@@ -74,7 +74,7 @@ html(ng-app='Match')
                       button.btn.btn-primary.btn-lg(data-toggle='modal', data-target='#userNameModal')
                         i.glyphicon.glyphicon-user.fa-2x
                     .col-xs-9
-                      p.announcement-heading(style='font-size: 20px;') {{user.name || '' }}
+                      p.announcement-heading.user-name {{user.name || '' }}
 
         .row
           .col-md-12(ng-hide='done')
