@@ -88,7 +88,7 @@ html(ng-app='Match')
         .row
           .col-md-12(ng-show='done')
             .well
-              p.announcement-heading(style='font-size: 20px;') Well done {{user.name || 'user' }}! Your next level is {{level}}. The highest level is {{MAX_LEVEL}}.
+              p.announcement-heading.user-name Well done {{user.name || 'user' }}! Your next level is {{level}}. The highest level is {{MAX_LEVEL}}.
               
     #userNameModal.modal.fade(tabindex="-1", role="dialog", aria-labelledby="userNameModalLabel", aria-hidden="true")
       .modal-dialog
