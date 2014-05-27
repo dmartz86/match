@@ -17,11 +17,14 @@
               th Time
             tr(ng-repeat='m in messages')
               td
-                div(align='center') {{m.level}}
+                div(align='center') 
+                  span(ng-bind='m.level')
               td
-                div(align='center') {{m.tries}}
+                div(align='center')
+                  span(ng-bind='m.tries')
               td 
-                div(align='center') {{m.time}}
+                div(align='center')
+                  span(ng-bind='m.time')
             tr(ng-show='messages.length==0')
               td(colspan='3')
                 div(align='center') Statistics is emtpy
