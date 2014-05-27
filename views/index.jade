@@ -1,110 +1,21 @@
 doctype html
 html(ng-app='Match')
   head
-    title {{title}}
+    title Match Game
     link(rel='stylesheet', href='/css/bootstrap.css')
     link(rel='stylesheet', href='/css/bootstrap-theme.css')
     link(rel='stylesheet', href='/css/sb-admin.css')
     link(rel='stylesheet', href='/font-awesome/css/font-awesome.min.css')
     
   body(ng-controller='GameController')
-    Header 
-    .row
-      .col-md-2
-        .well
-          .row
-            .col-lg-12
-              .panel.panel-info
-                .panel-heading
-                  .row
-                    .col-xs-12
-                      i.fa.fa-sitemap.fa-5x
-                    .col-xs-12.text-right
-                      p.announcement-heading {{level}}
-            .col-lg-12
-              .panel.panel-success
-                .panel-heading
-                  .row
-                    .col-xs-12
-                      i.fa.fa-check.fa-5x
-                    .col-xs-12.text-right
-                      p.announcement-heading  {{wins || 0 }}
-            .col-lg-12
-              .panel.panel-warning
-                .panel-heading
-                  .row
-                    .col-xs-12
-                      i.fa.fa-tasks.fa-5x
-                    .col-xs-12.text-right
-                      p.announcement-heading {{tries || 0 }}
-            .col-lg-12
-              div.level-results
-                .row
-                  .col-xs-12
-                    table.table.table-condensed
-                      tr
-                        td Level
-                        td Time
-                        td Attempt
-                      tr(ng-repeat='m in messages')
-                        td {{m.level}}
-                        td {{m.time}}
-                        td {{m.tries}}
-                      
-                    
+    Header
+    .container-fluid
 
-      .col-md-10
-        div
-          .row
-            .col-md-6
-               p.announcement-heading Time: {{time}} ms
-            .col-md-3
-              .btn-group.btn-group-justified
-                a.btn.btn-primary.col-sm-3(ng-show="time != 0", ng-click='stop()')
-                  i.glyphicon.glyphicon-pause.fa-3x
-                  br
-                a.btn.btn-primary.col-sm-3(ng-show="time == 0", ng-click='start()')
-                  i.glyphicon.glyphicon-play.fa-3x
-                  br
-            .col-md-3
-              .panel.panel-success
-                .panel-heading
-                  .row
-                    .col-xs-3
-                      button.btn.btn-primary.btn-lg(data-toggle='modal', data-target='#userNameModal')
-                        i.glyphicon.glyphicon-user.fa-2x
-                    .col-xs-9
-                      p.announcement-heading.user-name {{user.name || '' }}
-
-        .row
-          .col-md-12(ng-hide='done')
-            .well
-              .container(ng-show='!showMessage') 
-                .row
-                  form(role='form')
-                    .col-md-1.form-group(ng-repeat='c in chs')
-                      button.btn.btn-game.form-control(ng-class="{'btn-warning': c.status == 'selected', 'btn-success': c.status == 'done', '': c.status == ''}", ng-click='try($index)')
-                        .item-game(ng-bind='c.value')
-        .row
-          .col-md-12(ng-show='done')
-            .well
-              p.announcement-heading Well done {{user.name || 'user' }}! Your next level is {{level}}. The highest level is {{MAX_LEVEL}}.
-              
-    #userNameModal.modal.fade(tabindex="-1", role="dialog", aria-labelledby="userNameModalLabel", aria-hidden="true")
-      .modal-dialog
-        .modal-content
-          .modal-header
-            button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
-            h4.modal-title Set your name
-          .modal-body
-            form(role="form")
-              .form-group
-                input.form-control(ng-model='user.name')
-          .modal-footer
-            button.btn.btn-default(type='button', data-dismiss='modal') Close
-
-      
-    
+      include score
+      include game
+      include welldone
+      include message
+          
     script(type='text/javascript', src='/js/libs/jquery.js')
     script(type='text/javascript', src='/js/libs/angular.js')
     script(type='text/javascript', src='/js/libs/bootstrap.js')

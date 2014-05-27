@@ -1,0 +1,52 @@
+.well
+  .row
+    .col-lg-3            
+      .panel.panel-success
+        .panel-heading
+          .row
+            .col-xs-3
+              button.btn.btn-primary.btn-lg(data-toggle='modal', data-target='#userNameModal')
+                i.glyphicon.glyphicon-cog.fa-2x
+            .col-xs-9
+              p.announcement-heading(style='font-size: 20px; overflow: hidden; max-height: 60px; margin-left: 20px;') {{user.name || '' }}
+              
+      .btn-group.btn-group-justified
+        a.btn.btn-primary.col-sm-3(ng-disabled="!time != 0", ng-click='stop()')
+          i.glyphicon.glyphicon-pause.fa-3x
+          br
+        a.btn.btn-primary.col-sm-3(ng-disabled="!time == 0", ng-click='start()')
+          i.glyphicon.glyphicon-play.fa-3x
+          br
+    .col-lg-2
+      .panel.panel-info
+        .panel-heading
+          .row
+            .col-xs-12
+              i.fa.fa-sitemap.fa-5x
+            .col-xs-12.text-right
+              p.announcement-heading {{level}}
+    .col-lg-2
+      .panel.panel-success
+        .panel-heading
+          .row
+            .col-xs-12
+              i.fa.fa-check.fa-5x
+            .col-xs-12.text-right
+              p.announcement-heading  {{wins || 0 }}
+    .col-lg-2
+      .panel.panel-warning
+        .panel-heading
+          .row
+            .col-xs-12
+              i.fa.fa-tasks.fa-5x
+            .col-xs-12.text-right
+              p.announcement-heading {{tries || 0 }}
+    .col-lg-3
+      .panel.panel-danger
+        .panel-heading
+          .row
+            .col-xs-12 
+              i.glyphicon.glyphicon-time.fa-5x ms
+            .col-xs-12.text-right
+              p.announcement-heading {{time}}
+            

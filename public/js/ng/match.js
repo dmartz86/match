@@ -107,7 +107,6 @@ app.controller('GameController', function GameController($scope, $http) {
 	$scope.reset = function(){
   	$scope.peer = [];
 	  $scope.peerIdx = [];
-	  $scope.time = 0;
 	};
 	
 	$scope.addOne = function (idx){
@@ -130,6 +129,7 @@ app.controller('GameController', function GameController($scope, $http) {
 	$scope.start = function(){
 		$scope.done = false;
 		$scope.chs = [];
+		$scope.time = 0;
 		$scope.reset();
 		var sa = _.range($scope.START_RANGE, $scope.START_RANGE + $scope.level);
 		var sb = _.range($scope.START_RANGE, $scope.START_RANGE + $scope.level);

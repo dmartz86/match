@@ -349,12 +349,12 @@
  * 	Here the custom theme modifications
  */
 .btn-game {
-	font-size: 90px; 
-	height: 90px; 
-	width: 95px;
+	font-size: 90px;
+	max-height: 100px;
+	min-width: 100px;
 }
 .item-game {
-	margin-top: -25px;
+	margin-top: -15px;
 }
 .level-results {
 	max-height: 140px;
