@@ -12,10 +12,10 @@
                 span(ng-bind='user.name || "User"')
               
       .btn-group.btn-group-justified
-        a.btn.btn-primary.col-sm-3(ng-disabled="!time != 0", ng-click='stop()')
+        a.btn.btn-primary.col-sm-3(ng-disabled="time == 0", ng-click='stop()')
           i.glyphicon.glyphicon-pause.fa-3x
           br
-        a.btn.btn-primary.col-sm-3(ng-disabled="!time == 0", ng-click='start()')
+        a.btn.btn-primary.col-sm-3(ng-disabled="time != 0", ng-click='start()')
           i.glyphicon.glyphicon-play.fa-3x
           br
     .col-lg-2
