@@ -349,9 +349,10 @@
  * 	Here the custom theme modifications
  */
 .btn-game {
-	font-size: 90px;
+	font-size: 500%;
 	max-height: 100px;
-	min-width: 100px;
+	max-width: 8.33%;
+	min-width: 95px;
 }
 .item-game {
 	margin-top: -15px;

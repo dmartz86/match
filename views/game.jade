@@ -1,5 +1,5 @@
-div.well(ng-hide='done', ng-show='!showMessage')
-  .row
-    .col-md-1.form-group(ng-repeat='c in chs')
-      button.btn.btn-game(ng-class="{'btn-warning': c.status == 'selected', 'btn-success': c.status == 'done', '': c.status == ''}", ng-click='try($index)')
+div(ng-hide='done', ng-show='!showMessage')
+  .row-fluid(align='center')
+      a.btn.btn-game.btn-default.col-md-1(ng-repeat='c in chs',ng-class="{'btn-warning': c.status == 'selected', 'btn-success': c.status == 'done', '': c.status == ''}", ng-click='try($index)')
         .item-game(ng-bind='c.value')
+        br
