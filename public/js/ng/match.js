@@ -15,22 +15,25 @@ app.controller('GameController', function GameController($scope, $http) {
   $scope.title = "The match game";
   //Single match and characters array
   $scope.chs = [];
-  $scope.MAX_LEVEL = 24;
-  $scope.START_RANGE = 10033;
-  $scope.END_RANGE= 10057;
-  
-  
-  //ideographs Chinesse?
-  //$scope.START_RANGE = 13312;
-  //$scope.END_RANGE= 13711;
-  
-  //arrows
-  //$scope.START_RANGE = 8592;
-  //$scope.END_RANGE= 8703;
-  
-  //$scope.MAX_LEVEL = $scope.END_RANGE - $scope.START_RANGE;
-  
-  
+
+  //Level options
+  $scope.levelOptions = {
+    'circular': {start: 10033, end: 10057},
+    'arrows': {start: 8592, end: 8702},
+    'ideographs': {start: 13312, end: 13711}
+  }
+
+  /*
+   *Set range levels
+   */
+  $scope.setLevel = function(level){
+    $scope.START_RANGE = level.start;
+    $scope.END_RANGE = level.end;
+    $scope.MAX_LEVEL = level.end - level.start;
+  }
+
+  $scope.setLevel($scope.levelOptions['circular'])
+
   $scope.time = 0;
   $scope.tries = 0;
   $scope.wins = 0;
