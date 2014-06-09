@@ -18,6 +18,19 @@ app.controller('GameController', function GameController($scope, $http) {
   $scope.MAX_LEVEL = 24;
   $scope.START_RANGE = 10033;
   $scope.END_RANGE= 10057;
+  
+  
+  //ideographs Chinesse?
+  //$scope.START_RANGE = 13312;
+  //$scope.END_RANGE= 13711;
+  
+  //arrows
+  //$scope.START_RANGE = 8592;
+  //$scope.END_RANGE= 8703;
+  
+  //$scope.MAX_LEVEL = $scope.END_RANGE - $scope.START_RANGE;
+  
+  
   $scope.time = 0;
   $scope.tries = 0;
   $scope.wins = 0;
