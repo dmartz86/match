@@ -1,23 +1,35 @@
 .well
   .row
-    .col-lg-3            
-      .panel.panel-success
+    .col-lg-1
+      .panel.panel-info
         .panel-heading
           .row
-            .col-xs-3
-              button.btn.btn-primary.btn-lg(data-toggle='modal', data-target='#userNameModal')
-                i.glyphicon.glyphicon-cog.fa-2x
-            .col-xs-9
-              p.announcement-heading(style='font-size: 20px; overflow: hidden; max-height: 60px; margin-left: 20px;')
-                span(ng-bind='user.name || "User"')
-              
-      .btn-group.btn-group-justified
-        a.btn.btn-primary.col-sm-3(ng-disabled="time == 0", ng-click='stop()')
-          i.glyphicon.glyphicon-pause.fa-3x
-          br
-        a.btn.btn-primary.col-sm-3(ng-disabled="time != 0", ng-click='start()')
-          i.glyphicon.glyphicon-play.fa-3x
-          br
+            a.btn.btn-info.col-md-10.btn-help(ng-disabled="time != 0"
+              ,ng-click='setLevel(levelOptions["circular"])'
+              ,data-toggle='modal', data-target='#helpModal' )
+              span.fa-2x(ng-bind='"?"')
+    .col-lg-3
+      .panel.panel-info
+        .panel-heading
+          .btn-group.btn-group-justified
+            a.btn.btn-primary.btn-lg(data-toggle='modal', data-target='#userNameModal')
+              i.glyphicon.glyphicon-cog.fa-2x
+              br
+            a.btn.btn-primary.col-sm-3(ng-disabled="time == 0", ng-click='stop()')
+              i.glyphicon.glyphicon-pause.fa-3x
+              br
+            a.btn.btn-primary.col-sm-3(ng-disabled="time != 0", ng-click='start()')
+              i.glyphicon.glyphicon-play.fa-3x
+        .panel-heading
+          .btn-group.btn-group-justified
+            a.btn.btn-info.col-md-6(ng-disabled="time != 0", ng-click='setLevel(levelOptions["circular"])')
+              span.fa-2x(ng-bind='pSc(10033)')
+            a.btn.btn-info.col-md-6(ng-disabled="time != 0", ng-click='setLevel(levelOptions["arrows"])')
+              span.fa-2x(ng-bind='pSc(8592)')
+            a.btn.btn-info.col-md-6(ng-disabled="time != 0", ng-click='setLevel(levelOptions["ideographs"])')
+              span.fa-2x(ng-bind='pSc(13312)')
+
+
     .col-lg-2
       .panel.panel-info
         .panel-heading
@@ -42,12 +54,11 @@
               i.fa.fa-tasks.fa-5x
             .col-xs-12.text-right
               p.announcement-heading(ng-bind='tries || 0') 0
-    .col-lg-3
+    .col-lg-2
       .panel.panel-danger
         .panel-heading
           .row
-            .col-xs-12 
-              i.glyphicon.glyphicon-time.fa-5x ms
+            .col-xs-12
+              i.glyphicon.glyphicon-time.fa-5x
             .col-xs-12.text-right
               p.announcement-heading(ng-bind='time || 0') 0
-            

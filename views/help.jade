@@ -1,0 +1,31 @@
+#helpModal.modal.fade(tabindex="-1", role="dialog", aria-labelledby="helpModalLabel", aria-hidden="true")
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+        h4.modal-title Help for play Match - Icon list and meaning
+      .modal-body
+        form(role="form")
+          table.table.table-condensed.table-striped.table-bordered
+            tr
+              th Icon
+              th Name
+              th Description
+            tr(ng-repeat='h in help')
+              td
+                div(align='center')
+                  span(ng-bind='h.icon')
+              td
+                div(align='center')
+                  span(ng-bind='h.name')
+              td
+                div(align='center')
+                  span(ng-bind='h.desc')
+            tr(ng-show='stats.length==0')
+              td(colspan='3')
+                div(align='center') Help is emtpy
+            tr
+              td(colspan='3')
+                p Note: All levels are free to play. Just find the way and you can post it on some network.
+      .modal-footer
+        button.btn.btn-default(type='button', data-dismiss='modal') Close
