@@ -49,7 +49,8 @@ app.controller('GameController', function GameController($scope, $http) {
   /*
    *Set range levels
    */
-  $scope.setLevel = function(level)
+  $scope.setLevel = function(level){
+    localStorage.setItem('theme', JSON.stringify(angular.copy(level)));
     $scope.START_RANGE = level.start;
     $scope.END_RANGE = level.end;
     $scope.MAX_LEVEL = level.end - level.start;
@@ -167,7 +168,6 @@ app.controller('GameController', function GameController($scope, $http) {
   };
 
   $scope.start = function(){
-    $scope.setLevel($scope.theme)
     $scope.done = false;
     $scope.chs = [];
     $scope.time = 0;
@@ -203,7 +203,8 @@ app.controller('GameController', function GameController($scope, $http) {
     localStorage.setItem('user', JSON.stringify(angular.copy($scope.user)));
     localStorage.setItem('level', angular.copy($scope.level));
     localStorage.setItem('stats', JSON.stringify(angular.copy($scope.stats)));
-    localStorage.setItem('theme', JSON.stringify(angular.copy($scope.theme)));
   }
+
+  $scope.setLevel($scope.theme);
 
 });
