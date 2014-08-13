@@ -205,6 +205,11 @@ app.controller('GameController', function GameController($scope, $http) {
     localStorage.setItem('stats', JSON.stringify(angular.copy($scope.stats)));
   }
 
+  $scope.clearLocalStorage = function(){
+    localStorage.clear();
+    window.location.reload();
+  }
+
   $scope.setLevel($scope.theme);
 
 });

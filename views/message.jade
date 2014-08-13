@@ -28,5 +28,12 @@
             tr(ng-show='stats.length==0')
               td(colspan='3')
                 div(align='center') Statistics is emtpy
+        .row
+          .col-md-12
+            h4 Reset game
+          .col-md-3
+          a.col-md-6.btn.btn-danger(ng-click="clearLocalStorage()") Reset
+          .col-md-3
+
       .modal-footer
         button.btn.btn-default(type='button', data-dismiss='modal') Close
