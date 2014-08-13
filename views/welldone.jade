@@ -2,3 +2,5 @@
   .col-md-12(ng-show='done')
     .well
       p.announcement-heading(style='font-size: 20px;') Well done {{user.name || 'user' }}! Your next level is {{level}}. The highest level in this theme is {{MAX_LEVEL}}.
+        a.btn.btn-primary(ng-disabled="time != 0", ng-click='start()')
+          i.glyphicon.glyphicon-play
