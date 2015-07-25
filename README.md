@@ -1,4 +1,4 @@
-
+This repo will not be longer mantained, please go to: https://github.com/dmartz86/game and see the ToDos completed
 # Match
 Just a JS game.
 
